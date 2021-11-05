@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import LoginSvg from '../assets/login.svg'
@@ -13,6 +13,7 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
   const [isValidUsername, setIsValidUsername] = useState(true);
   const [isValidPassword, setIsValidPassword] = useState(true);
 
@@ -52,6 +53,9 @@ const Login = () => {
         {isValidUsername ? null : <Text style={styles.msgError}>Please, check your username!</Text>}
         <Input name="Password" iconName="lock" value={password} newValue={(value) => newValueInputPassword(value)} placeholder="Your Password" maxLength={15} secureTextEntry />
         {isValidPassword ? null : <Text style={styles.msgError}>Please, check your password!</Text>}
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')} >
+          <Text style={styles.signup}>Don't have an account? Sign Up!</Text>
+        </TouchableOpacity>
         <Button title="Login" onPress={() =>  goScreenHome()} />
       </ScrollView>
     </SafeAreaView>
@@ -72,6 +76,12 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     color: '#ff305e',
     fontWeight: 'bold'
+  },
+  signup: {
+    color: '#B2B7D6',
+    fontWeight: 'bold',
+    marginLeft: 15,
+    marginTop: 10
   }
 });
 
